@@ -1,6 +1,4 @@
-# 使用树莓派搭建 Time Machine 的正确姿势
-
-群晖太贵了！若是不介意 USB 2.0 和 100 Mbps 带宽的话，用树莓派 + 移动硬盘做个低功耗小型 NAS 也是不错的选择，搭建 Samba 的教程到处都是，本篇将介绍如何以正确的姿势搭建 AFP 共享 + Time Machine。
+# Raspberry pi Time Machine and Network Attached Storage
 
 The following step are the ones that enable Time Machine backups with Raspberry Pi plus a bit of polishing to my taste.
 
@@ -95,7 +93,7 @@ In my case my HD is connected to USB and the device is `/dev/sda2`. A good hint 
 #### Create your mounting point:
 
 ```
-$ sudo mkdir -p /media/time_machine
+$ sudo mkdir -p /media/timemachine
 ```
 
 #### Check if Pi already auto-mounted your drive:
@@ -119,7 +117,7 @@ $ sudo nano /etc/fstab
 Add to the end of the file:
 
 ```
-/dev/sda2 /media/tm hfsplus force,rw,user,auto 0 0
+/dev/sda2 /media/timemachine hfsplus force,rw,user,auto 0 0
 ```
 
 Mount the drive
@@ -138,12 +136,6 @@ $ sudo mount
 
 #### Install Netatalk
 Netatalk simulates AFP, the network protocol Apple currently users for Time Machine backups.
-
-Install dependencies
-
-```
-sudo aptitude install build-essential libevent-dev libssl-dev libgcrypt11-dev libkrb5-dev libpam0g-dev libwrap0-dev libdb-dev libtdb-dev avahi-daemon libavahi-client-dev libacl1-dev libldap2-dev libcrack2-dev systemtap-sdt-dev libdbus-1-dev libdbus-glib-1-dev libglib2.0-dev libio-socket-inet6-perl tracker libtracker-sparql-1.0-dev libtracker-miner-1.0-dev
-```
 
 Install Netatalk via apt-get
 
@@ -271,7 +263,7 @@ Go to `System Preferences > Time Machine` and clik on `Select Disk...`. Your Pi 
 
 ## Notice
 
-- Make sure that `erveryone` has permissions to read & write your disk drive.
+- Make sure that `everyone` has permissions to read & write your disk drive.
 
 - If `aptitude install ...` at the last of step 5 shows an eror like `Package 'libmysqlclient-dev' has no installation candidate`, please try `default-libmysqlclient-dev`.
 
