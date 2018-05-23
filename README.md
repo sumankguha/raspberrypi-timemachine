@@ -119,7 +119,7 @@ $ sudo nano /etc/fstab
 Add to the end of the file:
 
 ```
-/dev/sda2 /media/time_machine hfsplus force,rw,user,noauto,x-systemd.automount 0 0
+/dev/sda2 /media/tm hfsplus force,rw,user,auto 0 0
 ```
 
 Mount the drive
